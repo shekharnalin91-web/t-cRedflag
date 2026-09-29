@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CorruptX — T&C Red Flag Scanner | Cybersecurity Hackathon</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/chatbot.css">
+  <style>
+    /* Landing-specific styles */
+    .hero-section {
+      padding: 72px 0 64px;
+      position: relative;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 48px;
+      align-items: center;
+    }
+    .hero-tagline {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--accent-cyan);
+      font-family: var(--font-mono);
+      letter-spacing: 0.05em;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+    }
+    .hero-title {
+      font-size: 3.4rem;
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 50%, #38bdf8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero-subtitle {
+      font-size: 1.18rem;
+      line-height: 1.7;
+      color: #94a3b8;
+      margin-bottom: 32px;
+      max-width: 580px;
+    }
+    .hero-cta-group {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    
+    /* Mockup Visual Card */
+    .mockup-card {
+      background: rgba(13, 19, 32, 0.85);
+      border: 1px solid var(--border-focus);
+      box-shadow: 0 0 40px rgba(0, 242, 255, 0.15), 0 20px 50px rgba(0,0,0,0.8);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      position: relative;
+    }
+    .mockup-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border-card);
+    }
+    .mockup-title {
+      font-size: 0.82rem;
+      font-family: var(--font-mono);
+      color: var(--accent-cyan);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .mockup-score-box {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(255, 51, 102, 0.08);
+      border: 1px solid rgba(255, 51, 102, 0.3);
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+      margin-bottom: 20px;
+    }
+    .mockup-score-num {
+      font-size: 2.8rem;
+      font-weight: 900;
+      color: var(--accent-crimson);
+      line-height: 1;
+    }
+    .mockup-tags-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+    .mockup-tag {
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius-sm);
+      padding: 8px 12px;
+      font-size: 0.76rem;
+      font-family: var(--font-mono);
+      color: #cbd5e1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    /* Section Styles */
+    .section-title-wrap {
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto 56px;
+    }
+    .section-title {
+      font-size: 2.2rem;
+      margin-bottom: 14px;
+    }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      margin-bottom: 80px;
+    }
+    .feature-card {
+      padding: 32px 28px;
+    }
+    .feature-icon-box {
+      width: 52px;
+      height: 52px;
+      border-radius: 12px;
+      background: rgba(0, 242, 255, 0.08);
+      border: 1px solid var(--border-focus);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent-cyan);
+      margin-bottom: 20px;
+      box-shadow: 0 0 16px var(--accent-cyan-glow);
+    }
+    .feature-title {
+      font-size: 1.35rem;
+      margin-bottom: 12px;
+      color: #fff;
+    }
+    .feature-desc {
+      font-size: 0.94rem;
+      line-height: 1.65;
+    }
+
+    /* Workflow Steps */
+    .workflow-steps-wrap {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 16px;
+      margin-bottom: 80px;
+    }
+    .workflow-step {
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius-md);
+      padding: 20px 16px;
+      text-align: center;
+      position: relative;
+    }
+    .workflow-num {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--accent-cyan);
+      font-family: var(--font-mono);
+      margin-bottom: 8px;
+    }
+    .workflow-label {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    /* Team Section */
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-bottom: 80px;
+    }
+    .team-member-card {
+      text-align: center;
+      padding: 28px 20px;
+    }
+    .team-avatar {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #00d2df 0%, #ff3366 100%);
+      margin: 0 auto 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: #fff;
+      box-shadow: 0 0 20px var(--accent-cyan-glow);
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      .features-grid { grid-template-columns: 1fr; }
+      .workflow-steps-wrap { grid-template-columns: 1fr 1fr; }
+      .team-grid { grid-template-columns: 1fr; }
+      .hero-title { font-size: 2.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Site Header -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand-wrapper">
+        <div class="brand-shield-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="brand-meta">
+          <span class="brand-team">Team CorruptX</span>
+          <span class="brand-name">T&C RED FLAG <span>SCANNER</span></span>
+        </div>
+      </a>
+
+      <nav class="main-nav">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="scanner.html" class="nav-link">Scanner</a>
+        <a href="results.html" class="nav-link">Results</a>
+        <a href="history.html" class="nav-link">History</a>
+        <a href="about.html" class="nav-link">About Team</a>
+      </nav>
+
+      <div class="header-actions">
+        <div class="system-status" id="system-status-indicator">
+          <span class="status-dot"></span>
+          <span id="system-status-text">CYBER ENGINE READY</span>
+        </div>
+        <button class="mobile-menu-btn" aria-label="Toggle navigation">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="container hero-grid">
+        <div class="hero-text-block">
+          <div class="hero-tagline">"Before you click Agree, know what you're agreeing to."</div>
+          <h1 class="hero-title">T&C RED FLAG SCANNER</h1>
+          <p class="hero-subtitle">
+            AI-powered analysis that finds risky clauses hidden inside Terms & Conditions, Privacy Policies, and EULAs before you surrender your privacy rights.
+          </p>
+          <div class="hero-cta-group">
+            <a href="scanner.html" class="btn btn-primary btn-lg">Scan a Document</a>
+            <a href="scanner.html?demo=high_risk_social" class="btn btn-secondary btn-lg">Try Demo Scan</a>
+            <a href="#how-it-works" class="btn btn-outline">See How It Works</a>
+          </div>
+        </div>
+
+        <!-- Visual Cybersecurity Dashboard Mockup -->
+        <div class="mockup-card">
+          <div class="mockup-header">
+            <span class="mockup-title">DEMO SECURITY AUDIT MOCKUP</span>
+            <span class="badge badge-high">LIVE ENGINE READY</span>
+          </div>
+
+          <div class="mockup-score-box">
+            <div>
+              <div style="font-size: 0.8rem; font-family: var(--font-mono); color: var(--text-dim); text-transform: uppercase;">Composite Risk Score</div>
+              <div style="font-size: 1.1rem; font-weight: 800; color: #fff; margin-top: 2px;">HIGH RISK DETECTED</div>
+            </div>
+            <div class="mockup-score-num">72<span style="font-size: 1.2rem; color: var(--text-dim);">/100</span></div>
+          </div>
+
+          <div style="font-size: 0.78rem; font-family: var(--font-mono); color: var(--accent-cyan); margin-bottom: 10px; text-transform: uppercase;">
+            Detected Critical Categories:
+          </div>
+
+          <div class="mockup-tags-grid">
+            <div class="mockup-tag">
+              <span>DATA SHARING</span>
+              <span class="badge badge-high" style="padding: 2px 6px; font-size: 0.68rem;">HIGH</span>
+            </div>
+            <div class="mockup-tag">
+              <span>TRACKING</span>
+              <span class="badge badge-high" style="padding: 2px 6px; font-size: 0.68rem;">HIGH</span>
+            </div>
+            <div class="mockup-tag">
+              <span>AUTO-RENEWAL</span>
+              <span class="badge badge-medium" style="padding: 2px 6px; font-size: 0.68rem;">MED</span>
+            </div>
+            <div class="mockup-tag">
+              <span>ARBITRATION</span>
+              <span class="badge badge-high" style="padding: 2px 6px; font-size: 0.68rem;">HIGH</span>
+            </div>
+            <div class="mockup-tag">
+              <span>LIABILITY</span>
+              <span class="badge badge-medium" style="padding: 2px 6px; font-size: 0.68rem;">MED</span>
+            </div>
+            <div class="mockup-tag">
+              <span>UNILATERAL CHANGES</span>
+              <span class="badge badge-high" style="padding: 2px 6px; font-size: 0.68rem;">HIGH</span>
+            </div>
+          </div>
+
+          <div style="margin-top: 18px; text-align: center;">
+            <a href="scanner.html?demo=high_risk_social" style="font-size: 0.85rem; font-family: var(--font-mono);">
+              Execute Live Analysis on this Policy &rarr;
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- The Problem Statement Section -->
+    <section style="padding: 60px 0; border-top: 1px solid var(--border-card); background: rgba(12, 16, 24, 0.4);">
+      <div class="container" style="text-align: center; max-width: 800px;">
+        <span class="badge badge-medium" style="margin-bottom: 16px;">THE INVISIBLE VULNERABILITY</span>
+        <h2 style="font-size: 2.2rem; margin-bottom: 18px; color: #fff;">
+          "Nobody reads the fine print. That's exactly where the risk hides."
+        </h2>
+        <p style="font-size: 1.05rem; line-height: 1.7; color: #94a3b8;">
+          The average Terms of Service agreement contains over 4,000 words—requiring roughly 30 minutes of legal deciphering. Tech companies leverage this fatigue to slip in binding arbitration, perpetual content licenses, cross-site telemetry, and unilateral modification rights.
+        </p>
+      </div>
+    </section>
+
+    <!-- 3 Feature Cards: DETECT, SCORE, EXPLAIN -->
+    <section class="container" style="padding: 60px 0;">
+      <div class="features-grid">
+        <div class="card card-cyber-accent feature-card">
+          <div class="feature-icon-box">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </div>
+          <h3 class="feature-title">DETECT</h3>
+          <p class="feature-desc">
+            Automatically identify potentially risky clauses across 14 cybersecurity and privacy categories, including device fingerprinting, third-party data sales, and class action waivers.
+          </p>
+        </div>
+
+        <div class="card card-cyber-accent feature-card">
+          <div class="feature-icon-box" style="color: var(--accent-green); border-color: rgba(0, 255, 136, 0.3);">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          </div>
+          <h3 class="feature-title">SCORE</h3>
+          <p class="feature-desc">
+            Generate a deterministic 0–100 risk score and tier classification (SAFE, CAUTION, HIGH RISK) based on clause severity weights and exposure density rather than random numbers.
+          </p>
+        </div>
+
+        <div class="card card-cyber-accent feature-card">
+          <div class="feature-icon-box" style="color: var(--accent-amber); border-color: rgba(255, 183, 0, 0.3);">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+          </div>
+          <h3 class="feature-title">EXPLAIN</h3>
+          <p class="feature-desc">
+            Translate confusing legalese into plain English. Understand exactly why a clause matters from an information security standpoint and receive clear, actionable defense recommendations.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="container" style="padding: 40px 0 70px;">
+      <div class="section-title-wrap">
+        <span class="badge badge-safe" style="margin-bottom: 12px;">SYSTEM PIPELINE</span>
+        <h2 class="section-title">How It Works</h2>
+        <p>A fast, 5-stage automated cybersecurity inspection pipeline designed for 100% offline local privacy.</p>
+      </div>
+
+      <div class="workflow-steps-wrap">
+        <div class="workflow-step">
+          <div class="workflow-num">01</div>
+          <div class="workflow-label">Paste or Upload Policy</div>
+          <p style="font-size: 0.78rem; margin-top: 6px; color: var(--text-dim);">Accepts raw text, .txt, .md, or .html files</p>
+        </div>
+        <div class="workflow-step">
+          <div class="workflow-num">02</div>
+          <div class="workflow-label">Extract Clauses</div>
+          <p style="font-size: 0.78rem; margin-top: 6px; color: var(--text-dim);">Segments sentences while protecting legal citations</p>
+        </div>
+        <div class="workflow-step">
+          <div class="workflow-num">03</div>
+          <div class="workflow-label">Analyze Risks</div>
+          <p style="font-size: 0.78rem; margin-top: 6px; color: var(--text-dim);">Evaluates clauses against 14 security rules</p>
+        </div>
+        <div class="workflow-step">
+          <div class="workflow-num">04</div>
+          <div class="workflow-label">Generate Score</div>
+          <p style="font-size: 0.78rem; margin-top: 6px; color: var(--text-dim);">Calculates weighted 0-100 exposure metric</p>
+        </div>
+        <div class="workflow-step">
+          <div class="workflow-num">05</div>
+          <div class="workflow-label">Explain Red Flags</div>
+          <p style="font-size: 0.78rem; margin-top: 6px; color: var(--text-dim);">Delivers plain English translations & guidance</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Cybersecurity Relevance Banner -->
+    <section style="background: rgba(15, 23, 42, 0.6); border-top: 1px solid var(--border-card); border-bottom: 1px solid var(--border-card); padding: 60px 0;">
+      <div class="container" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 32px;">
+        <div style="max-width: 650px;">
+          <span class="badge badge-high" style="margin-bottom: 12px;">CYBERSECURITY PERSPECTIVE</span>
+          <h3 style="font-size: 1.65rem; color: #fff; margin-bottom: 12px;">
+            Consent can become a critical data-security blind spot.
+          </h3>
+          <p style="font-size: 0.95rem; line-height: 1.6; color: #94a3b8;">
+            When users blindly click "I Agree", they grant legal permission for background tracking, credential sharing, and biometric profiling. Attackers and unscrupulous vendors exploit this legal umbrella to bypass traditional endpoint safeguards without triggering intrusion alerts.
+          </p>
+        </div>
+        <div>
+          <a href="scanner.html" class="btn btn-primary btn-lg">Launch Scanner Now</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="container" style="padding: 80px 0 40px;">
+      <div class="section-title-wrap">
+        <span class="badge badge-safe" style="margin-bottom: 12px;">HACKATHON TEAM</span>
+        <h2 class="section-title">Team CorruptX</h2>
+        <p>Built for the Cybersecurity Hackathon to protect user privacy rights in the digital age.</p>
+      </div>
+
+      <div class="team-grid">
+        <div class="card team-member-card">
+          <div class="team-avatar">VK</div>
+          <h3 style="font-size: 1.2rem; color: #fff; margin-bottom: 4px;">Vyom Khanna</h3>
+          <p style="font-size: 0.85rem; font-family: var(--font-mono); color: var(--accent-cyan); margin-bottom: 10px;">Team Lead</p>
+          <p style="font-size: 0.88rem; color: var(--text-dim);">System Architecture & Full-Stack Security Engineering</p>
+        </div>
+
+        <div class="card team-member-card">
+          <div class="team-avatar" style="background: linear-gradient(135deg, #00f2ff 0%, #00ff88 100%);">NS</div>
+          <h3 style="font-size: 1.2rem; color: #fff; margin-bottom: 4px;">Nalin Shakher</h3>
+          <p style="font-size: 0.85rem; font-family: var(--font-mono); color: var(--accent-cyan); margin-bottom: 10px;">Team Member</p>
+          <p style="font-size: 0.88rem; color: var(--text-dim);">Rule Engine, NLP Taxonomy & Offline Pipeline</p>
+        </div>
+
+        <div class="card team-member-card">
+          <div class="team-avatar" style="background: linear-gradient(135deg, #ffb700 0%, #ff3366 100%);">AV</div>
+          <h3 style="font-size: 1.2rem; color: #fff; margin-bottom: 4px;">Aayush Verma</h3>
+          <p style="font-size: 0.85rem; font-family: var(--font-mono); color: var(--accent-cyan); margin-bottom: 10px;">Team Member</p>
+          <p style="font-size: 0.88rem; color: var(--text-dim);">Cybersecurity Interface & Interactive Clause Inspector</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="brand-wrapper">
+            <div class="brand-shield-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <div class="brand-meta">
+              <span class="brand-team">Team CorruptX</span>
+              <span class="brand-name">T&C RED FLAG SCANNER</span>
+            </div>
+          </div>
+          <p class="footer-desc">
+            A cybersecurity hackathon project dedicated to de-obfuscating legal fine print and exposing privacy-invasive clauses.
+          </p>
+        </div>
+
+        <div class="footer-links">
+          <div>
+            <div class="footer-group-title">Navigation</div>
+            <ul class="footer-link-list">
+              <li><a href="index.html">Home</a></li>
+              <li><a href="scanner.html">Scanner</a></li>
+              <li><a href="results.html">Results Dashboard</a></li>
+              <li><a href="history.html">Scan History</a></li>
+              <li><a href="about.html">About & Team</a></li>
+            </ul>
+          </div>
+          <div>
+            <div class="footer-group-title">Demo Policies</div>
+            <ul class="footer-link-list">
+              <li><a href="scanner.html?demo=high_risk_social">Social App (High Risk)</a></li>
+              <li><a href="scanner.html?demo=moderate_risk_saas">NovaDesk SaaS (Caution)</a></li>
+              <li><a href="scanner.html?demo=safe_open_source">AegisGuard (Safe)</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Legal Disclaimer -->
+      <div class="footer-disclaimer">
+        <strong>Important Cybersecurity & Legal Disclaimer:</strong> This tool provides automated cybersecurity and data-privacy risk analysis for informational purposes and is not a substitute for professional legal advice. Results are generated via pattern matching and algorithmic analysis.
+      </div>
+
+      <div class="footer-bottom">
+        <span>&copy; 2026 Team CorruptX — Cybersecurity Hackathon Project</span>
+        <span>Offline-Ready Local Architecture</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/rules_data.js"></script>
+  <script src="js/sample_data.js"></script>
+  <script src="js/client_analyzer.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/chatbot.js" defer></script>
+</body>
+</html>

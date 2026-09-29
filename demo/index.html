@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NovaCloud Services - Create Account (Demo Site)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #0b0f19;
+      color: #e2e8f0;
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    /* Demo Banner */
+    .demo-bar {
+      background: linear-gradient(90deg, #1e1b4b, #311b92);
+      color: #c7d2fe;
+      padding: 10px 20px;
+      font-size: 0.85rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .demo-bar strong { color: #38bdf8; }
+    
+    .demo-btn {
+      background: #00f0ff;
+      color: #000;
+      border: none;
+      padding: 6px 14px;
+      border-radius: 6px;
+      font-weight: 700;
+      cursor: pointer;
+      font-size: 0.8rem;
+    }
+
+    .demo-btn:hover { background: #38bdf8; }
+
+    /* Page Content */
+    .signup-wrapper {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+
+    .signup-card {
+      background: #151d2a;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      width: 100%;
+      max-width: 440px;
+      padding: 36px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+    }
+
+    .brand {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .brand-logo {
+      font-size: 2.2rem;
+      margin-bottom: 8px;
+    }
+
+    .brand h1 {
+      font-size: 1.5rem;
+      color: #fff;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.85rem;
+      color: #94a3b8;
+      margin-bottom: 6px;
+    }
+
+    .form-group input {
+      width: 100%;
+      background: #0b0f19;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 8px;
+      padding: 12px;
+      color: #fff;
+      font-size: 0.95rem;
+    }
+
+    .form-group input:focus {
+      outline: none;
+      border-color: #38bdf8;
+    }
+
+    /* Consent Checkbox Box */
+    .terms-consent-box {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px dashed rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+      padding: 14px;
+      margin: 20px 0;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .terms-consent-box input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      margin-top: 2px;
+      accent-color: #38bdf8;
+      cursor: pointer;
+    }
+
+    .terms-label {
+      font-size: 0.85rem;
+      color: #cbd5e1;
+      line-height: 1.4;
+    }
+
+    .terms-label a {
+      color: #38bdf8;
+      text-decoration: underline;
+    }
+
+    .submit-btn {
+      width: 100%;
+      background: #2563eb;
+      color: #fff;
+      border: none;
+      padding: 14px;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .submit-btn:hover {
+      background: #1d4ed8;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Demo Test Header Bar -->
+  <div class="demo-bar">
+    <div>
+      🧪 <strong>DEMO TARGET WEBSITE</strong> — Test T&C Red Flag Guard Extension Here
+    </div>
+    <button class="demo-btn" id="triggerDemoPopupBtn">🛡️ Test Antivirus Warning Overlay</button>
+  </div>
+
+  <div class="signup-wrapper">
+    <div class="signup-card">
+      <div class="brand">
+        <div class="brand-logo">☁️</div>
+        <h1>NovaCloud Workspace</h1>
+        <p style="font-size:0.85rem; color:#94a3b8; margin-top:4px;">Create your enterprise cloud account</p>
+      </div>
+
+      <form id="signupForm" onsubmit="event.preventDefault(); alert('Account creation blocked by security guard demo.');">
+        <div class="form-group">
+          <label>Full Name</label>
+          <input type="text" placeholder="John Doe" value="John Doe">
+        </div>
+
+        <div class="form-group">
+          <label>Work Email</label>
+          <input type="email" placeholder="john@company.com" value="john@example.com">
+        </div>
+
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" placeholder="••••••••••••" value="Password123!">
+        </div>
+
+        <!-- Agreement Detection Target Box -->
+        <div class="terms-consent-box" id="consentBox">
+          <input type="checkbox" id="agreeCheckbox" required>
+          <label for="agreeCheckbox" class="terms-label">
+            I have read and agree to the <a href="terms.html" target="_blank" id="termsLink">NovaCloud Terms of Service & Privacy Policy</a>, including automatic billing, data licensing, and binding arbitration.
+          </label>
+        </div>
+
+        <button type="submit" class="submit-btn" id="createAccountBtn">Create NovaCloud Account</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    function triggerInlineAntivirusWarning() {
+      if (document.getElementById("tc-redflag-guard-overlay")) return;
+
+      const overlay = document.createElement("div");
+      overlay.id = "tc-redflag-guard-overlay";
+      overlay.style.cssText = `
+        position: fixed;
+        bottom: 24px;
+        right: 24px;
+        width: 390px;
+        max-width: calc(100vw - 32px);
+        background: #090e18;
+        border: 2px solid #dc2626;
+        border-radius: 14px;
+        box-shadow: 0 0 35px rgba(0, 242, 255, 0.25), 0 20px 40px rgba(0,0,0,0.9);
+        z-index: 2147483647;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        color: #e2e8f0;
+        padding: 20px;
+        box-sizing: border-box;
+      `;
+
+      overlay.innerHTML = `
+        <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 12px; margin-bottom: 14px;">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span style="font-size: 1.5rem;">🛡️</span>
+            <div>
+              <div style="font-weight: 800; font-size: 0.95rem; letter-spacing: 0.5px; color: #fff;">AGREEMENT DETECTED</div>
+              <div style="font-size: 0.75rem; color: #ff4757; font-weight: 700;">BEFORE CONSENT ACCEPTANCE</div>
+            </div>
+          </div>
+          <span id="tc-close-overlay" style="cursor: pointer; font-size: 1.2rem; color: #94a3b8; padding: 4px;">✕</span>
+        </div>
+
+        <div style="display: flex; align-items: center; justify-content: space-between; background: rgba(220, 38, 38, 0.1); border: 1px solid rgba(220, 38, 38, 0.3); padding: 10px 14px; border-radius: 10px; margin-bottom: 14px;">
+          <div>
+            <div style="font-size: 0.75rem; color: #94a3b8;">SAFETY SCORE</div>
+            <div style="font-size: 1.6rem; font-weight: 900; color: #ff4757; font-family: monospace;">18 / 100</div>
+          </div>
+          <span style="background: rgba(220,38,38,0.2); color: #ff4757; border: 1px solid #dc2626; padding: 4px 10px; border-radius: 6px; font-weight: 800; font-size: 0.8rem;">
+            ⛔ CRITICAL RISK
+          </span>
+        </div>
+
+        <div style="font-size: 0.84rem; font-weight: 700; color: #fff; margin-bottom: 8px;">🚨 Critical Red Flags Detected:</div>
+        <ul style="font-size: 0.8rem; color: #cbd5e1; padding-left: 18px; margin-bottom: 16px; line-height: 1.6;">
+          <li>⛔ <strong>Mandatory Binding Arbitration:</strong> Cayman Islands jurisdiction</li>
+          <li>⛔ <strong>AI Model Training License:</strong> Unrestricted access to user files</li>
+          <li>🔴 <strong>Data Selling:</strong> Personal data shared with ad brokers</li>
+          <li>🔴 <strong>Auto-Renewal:</strong> Converts to $299/mo subscription</li>
+        </ul>
+
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <button id="tc-view-clauses-btn" style="width: 100%; background: #00f2ff; color: #000; border: none; padding: 10px; border-radius: 8px; font-weight: 800; font-size: 0.85rem; cursor: pointer;">
+            🔍 Understand Risk & View Clauses
+          </button>
+          <button id="tc-accept-anyway-btn" style="width: 100%; background: rgba(255,255,255,0.06); color: #94a3b8; border: 1px solid rgba(255,255,255,0.1); padding: 8px; border-radius: 8px; font-size: 0.78rem; cursor: pointer;">
+            Proceed & Accept Terms
+          </button>
+        </div>
+      `;
+
+      document.body.appendChild(overlay);
+
+      document.getElementById("tc-close-overlay").onclick = () => overlay.remove();
+      document.getElementById("tc-accept-anyway-btn").onclick = () => overlay.remove();
+      document.getElementById("tc-view-clauses-btn").onclick = () => {
+        alert("🛡️ T&C RED FLAG GUARD:\n\n1. Section 1: Binding Arbitration in Cayman Islands (Class Action Waiver)\n2. Section 2: Perpetual License & AI Model Training\n3. Section 3: Data Sale & Third-Party Ad Broker Sharing\n4. Section 4: Auto-Renewal ($299/month)\n\nReview terms in full before consenting.");
+      };
+    }
+
+    document.getElementById('triggerDemoPopupBtn').addEventListener('click', () => {
+      if (window.showRedFlagWarningOverlay) {
+        window.showRedFlagWarningOverlay();
+      } else {
+        triggerInlineAntivirusWarning();
+      }
+    });
+  </script>
+</body>
+</html>

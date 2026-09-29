@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scanner — CorruptX T&C Red Flag Scanner</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/scanner.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/chatbot.css">
+</head>
+<body>
+
+  <!-- Site Header -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand-wrapper">
+        <div class="brand-shield-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="brand-meta">
+          <span class="brand-team">Team CorruptX</span>
+          <span class="brand-name">T&C RED FLAG <span>SCANNER</span></span>
+        </div>
+      </a>
+
+      <nav class="main-nav">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="scanner.html" class="nav-link active">Scanner</a>
+        <a href="results.html" class="nav-link">Results</a>
+        <a href="history.html" class="nav-link">History</a>
+        <a href="about.html" class="nav-link">About Team</a>
+      </nav>
+
+      <div class="header-actions">
+        <div class="system-status" id="system-status-indicator">
+          <span class="status-dot"></span>
+          <span id="system-status-text">CYBER ENGINE READY</span>
+        </div>
+        <button class="mobile-menu-btn" aria-label="Toggle navigation">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Scanner Workspace -->
+  <main class="container">
+    <div class="scanner-hero">
+      <div class="scanner-badge">CYBERSECURITY AUDIT CONSOLE</div>
+      <h1 class="scanner-title">Scan Terms & Conditions</h1>
+      <p class="scanner-subtitle">
+        Analyze Terms & Conditions from direct website URLs, pasted text, PDF documents, or screenshot images.
+      </p>
+    </div>
+
+    <!-- Mode Selector Tabs -->
+    <div class="scanner-tab-bar">
+      <button type="button" class="tab-btn active" id="tab-btn-url" data-tab="url">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        🌐 Analyze Website URL
+      </button>
+      <button type="button" class="tab-btn" id="tab-btn-text" data-tab="text">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        📝 Paste T&C Text
+      </button>
+      <button type="button" class="tab-btn" id="tab-btn-pdf" data-tab="file">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        📄 Upload PDF File
+      </button>
+      <button type="button" class="tab-btn" id="tab-btn-image" data-tab="file">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+        🖼️ Upload Screenshot
+      </button>
+      <button type="button" class="tab-btn btn-demo-tab" id="btn-trigger-demo">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        🚀 Try Demo
+      </button>
+    </div>
+
+    <div class="scanner-workspace">
+      <div class="scanner-card card-cyber-accent">
+
+        <!-- Website URL Input Panel (Active by default) -->
+        <div id="panel-url-input" class="scanner-panel active">
+          <div class="url-input-box-wrapper">
+            <div class="url-label">Enter Terms & Conditions Webpage URL:</div>
+            <div class="url-input-group">
+              <span class="url-icon">🌐</span>
+              <input type="url" id="tc-url-input" class="url-input" placeholder="https://example.com/terms" value="https://example.com/terms">
+              <button type="button" id="btn-analyze-url" class="btn btn-primary btn-url-analyze">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                Analyze Website
+              </button>
+            </div>
+            <div class="url-subtext">The scanner will retrieve the webpage, extract readable T&C text, strip ads and navigation UI, and run a security audit.</div>
+          </div>
+        </div>
+
+        <!-- Website Analysis Error / Failure State Banner (Hidden by default) -->
+        <div id="website-status-banner" class="website-status-banner" style="display: none;">
+          <div class="banner-header">
+            <span id="website-status-icon" class="status-icon">⚠️</span>
+            <span id="website-status-title" class="status-title">UNABLE TO ANALYZE</span>
+          </div>
+          <div id="website-status-desc" class="status-desc">
+            We couldn't access this Terms & Conditions page.
+          </div>
+          <div id="website-reasons-list" class="reasons-list">
+            <!-- Reasons populated dynamically -->
+          </div>
+          <div class="fallback-options-group">
+            <span class="fallback-label">Try an alternative scanner input method:</span>
+            <div class="fallback-buttons">
+              <button type="button" class="btn btn-secondary btn-sm fallback-btn" data-target="text">📝 Paste T&C Text</button>
+              <button type="button" class="btn btn-secondary btn-sm fallback-btn" data-target="pdf">📄 Upload PDF</button>
+              <button type="button" class="btn btn-secondary btn-sm fallback-btn" data-target="image">🖼️ Upload Screenshot</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Document Meta & Actions Bar -->
+        <div class="doc-meta-bar">
+          <div class="doc-name-input-group">
+            <span class="doc-name-label">Document Title:</span>
+            <input type="text" id="doc-name-input" class="doc-name-input" placeholder="e.g. HyperNet Social App Terms (Optional)">
+          </div>
+
+          <div class="scanner-actions-bar">
+            <button type="button" id="btn-load-demo" class="btn btn-secondary btn-sm" title="Load realistic sample policy">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              Load Demo Policy
+            </button>
+            <button type="button" id="btn-paste" class="btn btn-secondary btn-sm" title="Paste text from clipboard">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              Paste
+            </button>
+            <button type="button" id="btn-clear" class="btn btn-outline btn-sm" title="Clear workspace">
+              Clear
+            </button>
+          </div>
+        </div>
+
+        <!-- Hidden File Input & Dropzone -->
+        <input type="file" id="file-upload-input" accept=".txt,.md,.html,.htm,.pdf,.png,.jpg,.jpeg" style="display: none;">
+        <div id="file-dropzone" class="file-dropzone">
+          <div class="dropzone-inner">
+            <div class="dropzone-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            </div>
+            <div class="dropzone-text"><strong>Drag & Drop PDF or image here</strong> or click to browse</div>
+            <div class="dropzone-subtext">Supports .PDF, .TXT, .HTML, .PNG, .JPG files &bull; Processed 100% locally on your machine</div>
+          </div>
+        </div>
+
+        <!-- Textarea -->
+        <div class="textarea-wrapper">
+          <textarea id="policy-text" class="policy-textarea" placeholder="Paste Terms & Conditions, Privacy Policy or EULA prose here..."></textarea>
+        </div>
+
+        <!-- Stats Bar -->
+        <div class="textarea-stats-bar">
+          <div class="stats-group">
+            <div class="stat-item">Characters: <span id="char-count">0</span></div>
+            <div class="stat-item">Words: <span id="word-count">0</span></div>
+            <div class="stat-item">Estimated Clauses: <span id="clause-estimate">0</span></div>
+          </div>
+          <div class="security-privacy-note">
+            Zero Cloud Uploads &bull; Private & Secure
+          </div>
+        </div>
+
+        <!-- Launch Bar -->
+        <div class="scanner-launch-bar">
+          <div class="launch-tips">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+            <span>Tip: Click "Try Demo" above for an instant complete evaluation scan.</span>
+          </div>
+
+          <button type="button" id="btn-start-scan" class="btn btn-primary btn-scan-main">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            Start Security Scan
+          </button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Scanning Modal Overlay -->
+  <div id="scanning-overlay" class="scanning-overlay">
+    <div class="scanning-modal">
+      <div class="radar-box">
+        <div class="radar-ring ring-1"></div>
+        <div class="radar-ring ring-2"></div>
+        <div class="radar-ring ring-3"></div>
+        <div class="radar-sweep"></div>
+        <div class="radar-center-icon">
+          <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+      </div>
+
+      <h3 class="scan-progress-title">Scanning Policy</h3>
+      <p class="scan-progress-sub">Retrieving content and performing 18-category cybersecurity audit...</p>
+
+      <div class="scan-steps-list">
+        <div class="scan-step-item" id="step-1">
+          <div class="step-icon-indicator">•</div>
+          <span>Extracting prose and segmenting clauses...</span>
+        </div>
+        <div class="scan-step-item" id="step-2">
+          <div class="step-icon-indicator">•</div>
+          <span>Classifying risks against cybersecurity taxonomy...</span>
+        </div>
+        <div class="scan-step-item" id="step-3">
+          <div class="step-icon-indicator">•</div>
+          <span>Calculating reproducible 0–100 safety score...</span>
+        </div>
+        <div class="scan-step-item" id="step-4">
+          <div class="step-icon-indicator">•</div>
+          <span>Generating plain-English explanations...</span>
+        </div>
+      </div>
+
+      <div class="progress-bar-track">
+        <div id="scan-progress-fill" class="progress-bar-fill"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-disclaimer">
+        <strong>Disclaimer:</strong> ⚠️ This tool provides informational risk analysis, not legal advice. A safety score does not determine whether Terms & Conditions are legally valid, enforceable, or appropriate for your situation.
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 Team CorruptX — T&C Red Flag Scanner</span>
+        <span>Offline-Capable Architecture</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/rules_data.js"></script>
+  <script src="js/sample_data.js"></script>
+  <script src="js/client_analyzer.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/scanner.js"></script>
+  <script src="js/chatbot.js" defer></script>
+</body>
+</html>

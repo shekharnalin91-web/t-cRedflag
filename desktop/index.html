@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🛡️ T&C RED FLAG GUARD - Desktop Security Center</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Window Titlebar (Cybersecurity App Chrome) -->
+  <div class="titlebar">
+    <div class="titlebar-brand">
+      <span class="app-icon">🛡️</span>
+      <span class="app-title">T&C RED FLAG GUARD</span>
+      <span class="app-badge">v2.4.0 PRO</span>
+    </div>
+    <div class="system-status-indicator">
+      <span class="pulse-dot green"></span>
+      <span>REAL-TIME ENGINE: PROTECTED</span>
+    </div>
+    <div class="window-controls">
+      <span class="win-btn min">─</span>
+      <span class="win-btn max">□</span>
+      <span class="win-btn close">✕</span>
+    </div>
+  </div>
+
+  <div class="app-container">
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar">
+      <div class="nav-section-title">SECURITY SUITE</div>
+      <button class="nav-item active" data-tab="overview">
+        <span class="nav-icon">📊</span> Overview & Shield
+      </button>
+      <button class="nav-item" data-tab="history">
+        <span class="nav-icon">📋</span> Threat Log & History
+      </button>
+      <button class="nav-item" data-tab="extension">
+        <span class="nav-icon">🧩</span> Browser Extension
+      </button>
+      <button class="nav-item" data-tab="privacy">
+        <span class="nav-icon">🔐</span> Zero-Knowledge Audit
+      </button>
+      <button class="nav-item" data-tab="settings">
+        <span class="nav-icon">⚙️</span> App Settings
+      </button>
+
+      <div class="sidebar-footer">
+        <div class="protection-badge-box">
+          <div class="shield-mini">🛡️</div>
+          <div>
+            <div class="shield-status-title">Zero-Cloud Engine</div>
+            <div class="shield-status-sub">100% Offline Active</div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Workspace Content -->
+    <main class="main-content">
+      <!-- TAB 1: OVERVIEW -->
+      <section id="tab-overview" class="tab-panel active">
+        <div class="panel-header">
+          <div>
+            <h2>System Security Dashboard</h2>
+            <p class="panel-subtitle">Real-time surveillance for online legal agreements & privacy policies.</p>
+          </div>
+          <button class="btn btn-cyan" id="quickAuditBtn">⚡ Run Full System Audit</button>
+        </div>
+
+        <!-- Metric Cards Grid -->
+        <div class="metrics-grid">
+          <div class="metric-card glow-green">
+            <div class="metric-header">
+              <span class="metric-title">GUARD STATUS</span>
+              <span class="status-indicator">ACTIVE</span>
+            </div>
+            <div class="metric-value green-text">PROTECTED</div>
+            <div class="metric-footnote">Real-time extension daemon linked</div>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-header">
+              <span class="metric-title">AGREEMENTS DETECTED</span>
+              <span class="metric-icon">🔍</span>
+            </div>
+            <div class="metric-value" id="statDetectedCount">142</div>
+            <div class="metric-footnote">+12 this week</div>
+          </div>
+
+          <div class="metric-card glow-red">
+            <div class="metric-header">
+              <span class="metric-title">RED FLAGS BLOCKED</span>
+              <span class="metric-icon">⛔</span>
+            </div>
+            <div class="metric-value red-text" id="statBlockedCount">87</div>
+            <div class="metric-footnote">Prevented harmful consent</div>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-header">
+              <span class="metric-title">OFFLINE THREAT DB</span>
+              <span class="metric-icon">🧠</span>
+            </div>
+            <div class="metric-value">v2.4.0</div>
+            <div class="metric-footnote">18 Categories & 240+ Signatures</div>
+          </div>
+        </div>
+
+        <!-- System Shield Status & Quick Scanner -->
+        <div class="two-column-grid">
+          <div class="card status-panel">
+            <h3>🛡️ Protection Engines Status</h3>
+            <div class="engine-list">
+              <div class="engine-item">
+                <div class="engine-info">
+                  <span class="engine-dot active"></span>
+                  <div>
+                    <strong>Pre-Consent Form Interceptor</strong>
+                    <p>Monitors DOM for T&C checkboxes and submit buttons</p>
+                  </div>
+                </div>
+                <span class="badge badge-success">RUNNING</span>
+              </div>
+
+              <div class="engine-item">
+                <div class="engine-info">
+                  <span class="engine-dot active"></span>
+                  <div>
+                    <strong>18-Category AI & Regex Analyzer</strong>
+                    <p>Detects data selling, arbitration, AI training & forced renewal</p>
+                  </div>
+                </div>
+                <span class="badge badge-success">RUNNING</span>
+              </div>
+
+              <div class="engine-item">
+                <div class="engine-info">
+                  <span class="engine-dot active"></span>
+                  <div>
+                    <strong>Negation & Context Protection</strong>
+                    <p>Filters false positive alerts on protective disclaimers</p>
+                  </div>
+                </div>
+                <span class="badge badge-success">RUNNING</span>
+              </div>
+
+              <div class="engine-item">
+                <div class="engine-info">
+                  <span class="engine-dot active"></span>
+                  <div>
+                    <strong>Zero-Knowledge Local Storage</strong>
+                    <p>Prevents browsing logs from leaving localhost</p>
+                  </div>
+                </div>
+                <span class="badge badge-success">RUNNING</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card recent-alerts-panel">
+            <h3>🚨 Recent Security Warnings</h3>
+            <div class="recent-alerts-list" id="recentAlertsList">
+              <!-- Populated by JS -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 2: THREAT LOG & HISTORY -->
+      <section id="tab-history" class="tab-panel">
+        <div class="panel-header">
+          <div>
+            <h2>Agreement Interception Logs</h2>
+            <p class="panel-subtitle">History of intercepted agreements and clause risk breakdowns.</p>
+          </div>
+          <div class="button-group">
+            <button class="btn btn-secondary" id="exportHistoryBtn">📥 Export CSV Report</button>
+            <button class="btn btn-secondary" id="clearLogBtn">🗑️ Clear Logs</button>
+          </div>
+        </div>
+
+        <div class="card table-card">
+          <table class="log-table">
+            <thead>
+              <tr>
+                <th>Timestamp</th>
+                <th>Target Domain / Service</th>
+                <th>Safety Score</th>
+                <th>Critical Flags</th>
+                <th>High Flags</th>
+                <th>Action Taken</th>
+              </tr>
+            </thead>
+            <tbody id="historyTableBody">
+              <!-- Populated by JS -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- TAB 3: BROWSER EXTENSION -->
+      <section id="tab-extension" class="tab-panel">
+        <div class="panel-header">
+          <div>
+            <h2>Browser Extension Companion Status</h2>
+            <p class="panel-subtitle">Link and monitor Chrome, Edge, Brave, and Firefox extensions.</p>
+          </div>
+        </div>
+
+        <div class="two-column-grid">
+          <div class="card">
+            <h3>🧩 Installed Extensions</h3>
+            <div class="browser-status-list">
+              <div class="browser-card">
+                <div class="browser-icon">🌐</div>
+                <div class="browser-details">
+                  <strong>Google Chrome / Chromium</strong>
+                  <p>Extension v2.0.0 Active • Daemon Sync OK</p>
+                </div>
+                <span class="badge badge-success">CONNECTED</span>
+              </div>
+
+              <div class="browser-card">
+                <div class="browser-icon">🌊</div>
+                <div class="browser-details">
+                  <strong>Microsoft Edge</strong>
+                  <p>Extension v2.0.0 Active • Daemon Sync OK</p>
+                </div>
+                <span class="badge badge-success">CONNECTED</span>
+              </div>
+
+              <div class="browser-card">
+                <div class="browser-icon">🦁</div>
+                <div class="browser-details">
+                  <strong>Brave Browser</strong>
+                  <p>Extension v2.0.0 Active • Daemon Sync OK</p>
+                </div>
+                <span class="badge badge-success">CONNECTED</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>📦 Quick Extension Loader</h3>
+            <p class="card-desc">Need to load the unpacked extension into your browser?</p>
+            <ol class="step-list">
+              <li>Open <code>chrome://extensions</code> or <code>edge://extensions</code></li>
+              <li>Toggle <strong>Developer mode</strong> in top-right corner.</li>
+              <li>Click <strong>Load unpacked</strong>.</li>
+              <li>Select folder: <code>tc-red-flag-scanner/extension</code></li>
+            </ol>
+            <button class="btn btn-cyan" id="openExtFolderBtn">📁 Locate Extension Folder</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 4: ZERO-KNOWLEDGE AUDIT -->
+      <section id="tab-privacy" class="tab-panel">
+        <div class="panel-header">
+          <div>
+            <h2>Zero-Knowledge Privacy Verification</h2>
+            <p class="panel-subtitle">Independent verification that no browsing data or text ever leaves your machine.</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="audit-banner">
+            <div class="audit-shield">🔒</div>
+            <div>
+              <h3>100% LOCAL PROCESSING GUARANTEE</h3>
+              <p>T&C Red Flag Guard operates using an embedded regex parsing model and bundled threat dataset. No tracking telemetry, no network calls during clause parsing, and no third-party data sales.</p>
+            </div>
+          </div>
+
+          <div class="audit-checklist">
+            <div class="check-item">
+              <span class="check-icon">✓</span>
+              <div>
+                <strong>Network Activity Monitor</strong>
+                <p>0 Outbound telemetry payload events detected during T&C agreement analysis.</p>
+              </div>
+            </div>
+
+            <div class="check-item">
+              <span class="check-icon">✓</span>
+              <div>
+                <strong>Clause Extraction Isolation</strong>
+                <p>DOM text is parsed in memory and destroyed upon tab closure.</p>
+              </div>
+            </div>
+
+            <div class="check-item">
+              <span class="check-icon">✓</span>
+              <div>
+                <strong>Offline Threat Signature Engine</strong>
+                <p>18 Risk rule taxonomies stored in local <code>rules_data.js</code> manifest.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 5: APP SETTINGS -->
+      <section id="tab-settings" class="tab-panel">
+        <div class="panel-header">
+          <div>
+            <h2>Desktop Application Settings</h2>
+            <p class="panel-subtitle">Configure system background daemon, launch behavior, and notifications.</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="setting-toggle-row">
+            <div>
+              <strong>Start with Windows / System Boot</strong>
+              <p>Keep Red Flag Guard running silently in system tray.</p>
+            </div>
+            <label class="switch">
+              <input type="checkbox" checked>
+              <span class="slider"></span>
+            </label>
+          </div>
+
+          <div class="setting-toggle-row">
+            <div>
+              <strong>System Tray Security Notifications</strong>
+              <p>Show desktop notifications when critical legal threats are blocked.</p>
+            </div>
+            <label class="switch">
+              <input type="checkbox" checked>
+              <span class="slider"></span>
+            </label>
+          </div>
+
+          <div class="setting-toggle-row">
+            <div>
+              <strong>Auto-Update Threat Signatures</strong>
+              <p>Automatically download updated offline threat rule packs.</p>
+            </div>
+            <label class="switch">
+              <input type="checkbox" checked>
+              <span class="slider"></span>
+            </label>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

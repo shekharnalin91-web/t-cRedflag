@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>T&C Red Flag Guard - Extension Settings</title>
+  <link rel="stylesheet" href="settings.css">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="settings-container">
+    <header class="settings-header">
+      <div class="header-brand">
+        <div class="brand-icon">🛡️</div>
+        <div>
+          <h1>T&C RED FLAG GUARD</h1>
+          <p class="subtitle">Real-Time Agreement Protection Settings</p>
+        </div>
+      </div>
+      <div class="header-status">
+        <span class="status-badge active"><span class="pulse-dot"></span> REAL-TIME GUARD: ACTIVE</span>
+      </div>
+    </header>
+
+    <div class="settings-grid">
+      <!-- Protection Level Mode -->
+      <section class="card settings-card">
+        <h2>🛡️ Protection Sensitivity Mode</h2>
+        <p class="card-desc">Choose when the Red Flag Guard should interrupt and display the antivirus warning popup on web pages.</p>
+        
+        <div class="radio-options">
+          <label class="radio-card">
+            <input type="radio" name="protectionLevel" value="maximum">
+            <div class="radio-content">
+              <div class="radio-title">⚡ Maximum Guard (Strict)</div>
+              <div class="radio-desc">Warn on all detected agreement forms, including Low, Medium, High, and Critical risk clauses.</div>
+            </div>
+          </label>
+
+          <label class="radio-card selected">
+            <input type="radio" name="protectionLevel" value="balanced" checked>
+            <div class="radio-content">
+              <div class="radio-title">⚖️ Balanced Shield (Recommended)</div>
+              <div class="radio-desc">Warn only when Medium, High, or Critical risk red flags are detected in agreements.</div>
+            </div>
+          </label>
+
+          <label class="radio-card">
+            <input type="radio" name="protectionLevel" value="silent">
+            <div class="radio-content">
+              <div class="radio-title">🔇 Silent Monitoring</div>
+              <div class="radio-desc">Detect & analyze agreements in background. Update extension icon badge without popping up.</div>
+            </div>
+          </label>
+
+          <label class="radio-card">
+            <input type="radio" name="protectionLevel" value="paused">
+            <div class="radio-content">
+              <div class="radio-title">🛑 Pause Protection</div>
+              <div class="radio-desc">Temporarily disable automatic agreement detection and in-page warning overlays.</div>
+            </div>
+          </label>
+        </div>
+      </section>
+
+      <!-- Category Alert Filters -->
+      <section class="card settings-card">
+        <h2>🚩 Custom Risk Category Alerts</h2>
+        <p class="card-desc">Select specific risk categories you want flagged during automated scanning.</p>
+
+        <div class="category-grid" id="categoryGrid">
+          <!-- Populated by JS -->
+        </div>
+      </section>
+
+      <!-- Domain Exclusions / Whitelist -->
+      <section class="card settings-card">
+        <h2>🌐 Whitelisted Domains</h2>
+        <p class="card-desc">Websites added here will never trigger automatic agreement popup warnings.</p>
+
+        <div class="whitelist-input-group">
+          <input type="text" id="whitelistInput" placeholder="e.g. github.com, wikipedia.org" class="whitelist-input">
+          <button id="addWhitelistBtn" class="btn btn-primary">+ Add Domain</button>
+        </div>
+
+        <div class="whitelist-tags" id="whitelistTags">
+          <!-- Dynamic tags -->
+        </div>
+      </section>
+
+      <!-- Privacy & Local Data Control -->
+      <section class="card settings-card">
+        <h2>🔐 Local Privacy & Audit</h2>
+        <div class="privacy-status-box">
+          <div class="privacy-icon">🔒</div>
+          <div>
+            <strong>100% Local Processing Mode</strong>
+            <p>All clause parsing, agreement detection, and score calculations happen strictly inside your browser using bundled offline threat rules. Zero browsing history is ever transmitted to cloud servers.</p>
+          </div>
+        </div>
+
+        <div class="action-buttons">
+          <button id="clearHistoryBtn" class="btn btn-secondary">🗑️ Clear Local Scan Logs</button>
+          <button id="resetDefaultsBtn" class="btn btn-secondary">↺ Reset Default Settings</button>
+        </div>
+      </section>
+    </div>
+
+    <footer class="settings-footer">
+      <div id="saveToast" class="save-toast hidden">✓ Settings saved automatically</div>
+      <p>T&C Red Flag Guard v2.4.0 — Zero-Knowledge Legal Risk Intelligence</p>
+    </footer>
+  </div>
+
+  <script src="settings.js"></script>
+</body>
+</html>

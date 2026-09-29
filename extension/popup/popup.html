@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>T&C Red Flag Guard</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+
+  <div class="popup-container">
+    <div class="header">
+      <div class="brand">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="var(--cyan)" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <span>T&C RED FLAG GUARD</span>
+      </div>
+      <div class="status-badge" id="status-badge">🟢 PROTECTION ACTIVE</div>
+    </div>
+
+    <div class="site-card">
+      <div class="sc-label">CURRENT WEBSITE</div>
+      <div id="site-domain" class="sc-domain">detecting...</div>
+      <div id="site-score-row" class="sc-score-row">
+        <span>Safety Rating:</span>
+        <strong id="site-score-val">-- / 100</strong>
+      </div>
+    </div>
+
+    <div class="toggle-row">
+      <span>Real-Time Agreement Protection</span>
+      <label class="switch">
+        <input type="checkbox" id="chk-toggle-protection" checked>
+        <span class="slider"></span>
+      </label>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat-box">
+        <span class="stat-num" id="stat-scanned">27</span>
+        <span class="stat-lbl">Scanned</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-num text-crimson" id="stat-high">5</span>
+        <span class="stat-lbl">High Risk</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-num text-amber" id="stat-med">9</span>
+        <span class="stat-lbl">Medium Risk</span>
+      </div>
+    </div>
+
+    <div class="actions-group">
+      <button type="button" id="btn-scan-current" class="btn btn-primary">
+        🔍 Scan Active Page Now
+      </button>
+      <button type="button" id="btn-open-options" class="btn btn-secondary">
+        ⚙️ Protection Settings
+      </button>
+    </div>
+
+    <div class="footer-note">
+      Zero Cloud Data Leakage &bull; Local Scanner
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About — Team CorruptX | T&C Red Flag Scanner</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/chatbot.css">
+  <style>
+    .about-hero {
+      padding: 60px 0 36px;
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .about-hero-title {
+      font-size: 2.8rem;
+      font-weight: 800;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 50%, #38bdf8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .about-card-section {
+      margin-bottom: 48px;
+    }
+    .roadmap-flowchart {
+      background: rgba(8, 12, 20, 0.8);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      margin-top: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+    }
+    .flow-node {
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid var(--border-focus);
+      padding: 8px 14px;
+      border-radius: var(--radius-sm);
+      color: #fff;
+    }
+    .flow-arrow {
+      color: var(--accent-cyan);
+      font-weight: 800;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Site Header -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand-wrapper">
+        <div class="brand-shield-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="brand-meta">
+          <span class="brand-team">Team CorruptX</span>
+          <span class="brand-name">T&C RED FLAG <span>SCANNER</span></span>
+        </div>
+      </a>
+
+      <nav class="main-nav">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="scanner.html" class="nav-link">Scanner</a>
+        <a href="results.html" class="nav-link">Results</a>
+        <a href="history.html" class="nav-link">History</a>
+        <a href="about.html" class="nav-link active">About Team</a>
+      </nav>
+
+      <div class="header-actions">
+        <div class="system-status" id="system-status-indicator">
+          <span class="status-dot"></span>
+          <span id="system-status-text">CYBER ENGINE READY</span>
+        </div>
+        <button class="mobile-menu-btn" aria-label="Toggle navigation">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- About Content -->
+  <main class="container" style="margin-bottom: 80px;">
+    <div class="about-hero">
+      <span class="badge badge-safe" style="margin-bottom: 12px;">CYBERSECURITY HACKATHON INITIATIVE</span>
+      <h1 class="about-hero-title">About T&C Red Flag Scanner</h1>
+      <p style="font-size: 1.1rem; line-height: 1.7; color: #94a3b8;">
+        Empowering users to decode legal obfuscation, identify privacy-invasive terms, and preserve their digital sovereignty before consenting to software agreements.
+      </p>
+    </div>
+
+    <!-- The Problem & Solution -->
+    <div class="about-card-section card card-cyber-accent">
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 36px;">
+        <div>
+          <span class="badge badge-high" style="margin-bottom: 12px;">THE PROBLEM</span>
+          <h2 style="font-size: 1.5rem; color: #fff; margin-bottom: 12px;">The Consent Fatigue Crisis</h2>
+          <p style="font-size: 0.94rem; line-height: 1.7; color: #cbd5e1; margin-bottom: 12px;">
+            Over 95% of consumers accept legal terms and privacy policies without reading them. Companies intentionally draft documents spanning dozens of pages packed with dense legalese to discourage scrutiny.
+          </p>
+          <p style="font-size: 0.94rem; line-height: 1.7; color: #cbd5e1;">
+            Buried inside these agreements are aggressive terms: mandatory binding arbitration that eliminates court access, permission to record screen sessions, device fingerprinting, and rights to sell personal records to data brokers without compensation.
+          </p>
+        </div>
+
+        <div>
+          <span class="badge badge-safe" style="margin-bottom: 12px;">THE SOLUTION</span>
+          <h2 style="font-size: 1.5rem; color: #fff; margin-bottom: 12px;">Lightweight Automated De-Obfuscation</h2>
+          <p style="font-size: 0.94rem; line-height: 1.7; color: #cbd5e1; margin-bottom: 12px;">
+            The <strong>T&C Red Flag Scanner</strong> is a specialized security utility designed to inspect agreements in milliseconds. It extracts clauses, scans for risk indicators across 14 cybersecurity categories, calculates an objective 0–100 risk score, and translates legal traps into clear, plain English.
+          </p>
+          <p style="font-size: 0.94rem; line-height: 1.7; color: #cbd5e1;">
+            Crucially, it is built with an <strong>offline-first local architecture</strong>, meaning your sensitive contracts and documents never need to be uploaded to a remote cloud server.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Core Methodology: Detect, Score, Explain -->
+    <div class="about-card-section card">
+      <h2 style="font-size: 1.6rem; color: #fff; margin-bottom: 24px; text-align: center;">Our Core Three-Pillar Methodology</h2>
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;">
+        <div style="background: rgba(15, 23, 42, 0.6); padding: 20px; border-radius: 10px; border: 1px solid var(--border-card);">
+          <div style="font-size: 1.15rem; font-weight: 700; color: var(--accent-cyan); margin-bottom: 8px;">1. DETECT</div>
+          <p style="font-size: 0.88rem; color: #cbd5e1; line-height: 1.6;">
+            Rule-based and pattern-driven NLP segmentation scans text sentence-by-sentence against a taxonomy of 14 privacy risk categories, identifying exact quotes containing clauses of concern.
+          </p>
+        </div>
+        <div style="background: rgba(15, 23, 42, 0.6); padding: 20px; border-radius: 10px; border: 1px solid var(--border-card);">
+          <div style="font-size: 1.15rem; font-weight: 700; color: var(--accent-green); margin-bottom: 8px;">2. SCORE</div>
+          <p style="font-size: 0.88rem; color: #cbd5e1; line-height: 1.6;">
+            Computes a deterministic 0–100 score weighted by severity (High: 15–16 pts, Medium: 8–9 pts, Low: 4–5 pts) alongside exposure density, categorizing documents into SAFE, CAUTION, or HIGH RISK.
+          </p>
+        </div>
+        <div style="background: rgba(15, 23, 42, 0.6); padding: 20px; border-radius: 10px; border: 1px solid var(--border-card);">
+          <div style="font-size: 1.15rem; font-weight: 700; color: var(--accent-amber); margin-bottom: 8px;">3. EXPLAIN</div>
+          <p style="font-size: 0.88rem; color: #cbd5e1; line-height: 1.6;">
+            Translates convoluted legal rhetoric into concise English explanations, details why the term matters from a cybersecurity posture, and provides defensive actions for users.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cybersecurity Relevance -->
+    <div class="about-card-section card" style="border-left: 4px solid var(--accent-cyan);">
+      <h3 style="font-size: 1.35rem; color: #fff; margin-bottom: 12px;">Cybersecurity Relevance & Threat Modeling</h3>
+      <p style="font-size: 0.95rem; line-height: 1.7; color: #cbd5e1; margin-bottom: 12px;">
+        In cybersecurity, human users are often considered the weakest link. However, this weakness is exacerbated when users are coerced through dark design patterns into legally signing away their perimeter defenses.
+      </p>
+      <blockquote style="padding: 16px 20px; background: rgba(0, 242, 255, 0.04); border-left: 3px solid var(--accent-cyan); border-radius: 6px; font-style: italic; color: #e2e8f0; margin-bottom: 12px;">
+        "Consent can become a data-security blind spot when users unknowingly authorize collection, tracking or third-party access."
+      </blockquote>
+      <p style="font-size: 0.95rem; line-height: 1.7; color: #cbd5e1;">
+        By scanning terms prior to consent, users can identify third-party sub-processor supply chain vulnerabilities, prevent persistent hardware fingerprinting, and decline contracts with mandatory unilateral revision terms.
+      </p>
+    </div>
+
+    <!-- Future AI Architecture & Roadmap -->
+    <div class="about-card-section card">
+      <h3 style="font-size: 1.35rem; color: #fff; margin-bottom: 8px;">Future AI Architecture & Roadmap</h3>
+      <p style="font-size: 0.9rem; color: var(--text-muted);">
+        The current version implements an efficient, zero-cost, local rule-based NLP pipeline. The architecture is engineered modularly so that advanced local LLMs (e.g. Llama 3, Gemma, Mistral) or cloud LLM APIs can be dropped in as classification plugins.
+      </p>
+
+      <div class="roadmap-flowchart">
+        <div class="flow-node">Website / Document</div>
+        <div class="flow-arrow">&rarr;</div>
+        <div class="flow-node">Text Extraction</div>
+        <div class="flow-arrow">&rarr;</div>
+        <div class="flow-node">Clause Segmentation</div>
+        <div class="flow-arrow">&rarr;</div>
+        <div class="flow-node" style="border-color: var(--accent-cyan); color: var(--accent-cyan);">AI/NLP Classification</div>
+        <div class="flow-arrow">&rarr;</div>
+        <div class="flow-node">Risk Taxonomy</div>
+        <div class="flow-arrow">&rarr;</div>
+        <div class="flow-node">Weighted Risk Score</div>
+        <div class="flow-arrow">&rarr;</div>
+        <div class="flow-node">Plain-English Explanations</div>
+        <div class="flow-arrow">&rarr;</div>
+        <div class="flow-node" style="border-color: var(--accent-green); color: var(--accent-green);">User Dashboard</div>
+      </div>
+    </div>
+
+    <!-- Hackathon Team Section -->
+    <div class="about-card-section">
+      <div style="text-align: center; margin-bottom: 32px;">
+        <span class="badge badge-safe" style="margin-bottom: 10px;">CREDITS</span>
+        <h2 style="font-size: 2rem; color: #fff;">Team CorruptX</h2>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;">
+        <div class="card" style="text-align: center; padding: 32px 20px;">
+          <div style="width: 68px; height: 68px; border-radius: 50%; background: linear-gradient(135deg, #00d2df 0%, #0088cc 100%); margin: 0 auto 16px; display: flex; align-items: center; justify-content: center; font-size: 1.35rem; font-weight: 800; color: #fff; box-shadow: 0 0 20px var(--accent-cyan-glow);">
+            VK
+          </div>
+          <h3 style="font-size: 1.25rem; color: #fff; margin-bottom: 4px;">Vyom Khanna</h3>
+          <p style="font-size: 0.85rem; font-family: var(--font-mono); color: var(--accent-cyan); margin-bottom: 12px;">Team Lead</p>
+          <p style="font-size: 0.88rem; color: var(--text-dim); line-height: 1.5;">
+            Architectural leadership, core Flask service implementation, threat taxonomy coordination, and hackathon presentation.
+          </p>
+        </div>
+
+        <div class="card" style="text-align: center; padding: 32px 20px;">
+          <div style="width: 68px; height: 68px; border-radius: 50%; background: linear-gradient(135deg, #00f2ff 0%, #00ff88 100%); margin: 0 auto 16px; display: flex; align-items: center; justify-content: center; font-size: 1.35rem; font-weight: 800; color: #fff; box-shadow: 0 0 20px var(--accent-green-glow);">
+            NS
+          </div>
+          <h3 style="font-size: 1.25rem; color: #fff; margin-bottom: 4px;">Nalin Shakher</h3>
+          <p style="font-size: 0.85rem; font-family: var(--font-mono); color: var(--accent-cyan); margin-bottom: 12px;">Team Member</p>
+          <p style="font-size: 0.88rem; color: var(--text-dim); line-height: 1.5;">
+            NLP rule-based parsing engine, regex optimization, negation handling for user protections, and offline runtime architecture.
+          </p>
+        </div>
+
+        <div class="card" style="text-align: center; padding: 32px 20px;">
+          <div style="width: 68px; height: 68px; border-radius: 50%; background: linear-gradient(135deg, #ffb700 0%, #ff3366 100%); margin: 0 auto 16px; display: flex; align-items: center; justify-content: center; font-size: 1.35rem; font-weight: 800; color: #fff; box-shadow: 0 0 20px var(--accent-crimson-glow);">
+            AV
+          </div>
+          <h3 style="font-size: 1.25rem; color: #fff; margin-bottom: 4px;">Aayush Verma</h3>
+          <p style="font-size: 0.85rem; font-family: var(--font-mono); color: var(--accent-cyan); margin-bottom: 12px;">Team Member</p>
+          <p style="font-size: 0.88rem; color: var(--text-dim); line-height: 1.5;">
+            Cybersecurity dashboard UI, interactive clause highlighting inspector, SVG circular gauge, and responsive frontend design.
+          </p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-disclaimer">
+        <strong>Important Disclaimer:</strong> This tool provides automated risk analysis for informational purposes and is not a substitute for professional legal advice.
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 Team CorruptX — T&C Red Flag Scanner</span>
+        <span>Offline-Capable Architecture</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/rules_data.js"></script>
+  <script src="js/sample_data.js"></script>
+  <script src="js/client_analyzer.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/chatbot.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+{
+  "manifest_version": 3,
+  "name": "T&C Red Flag Guard",
+  "version": "2.0.0",
+  "description": "Antivirus-style protection for Terms & Conditions. Detects consent requests and warns you about privacy & financial risks before you agree.",
+  "permissions": [
+    "activeTab",
+    "storage",
+    "scripting"
+  ],
+  "host_permissions": [
+    "http://*/*",
+    "https://*/*"
+  ],
+  "background": {
+    "service_worker": "background/service-worker.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "scanner/rules_data.js",
+        "scanner/client_analyzer.js",
+        "content/detector.js",
+        "content/extractor.js",
+        "content/highlighter.js",
+        "content/popup-warning.js"
+      ],
+      "css": [],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_title": "T&C Red Flag Guard",
+    "default_popup": "popup/popup.html"
+  },
+  "options_page": "options/settings.html"
+}

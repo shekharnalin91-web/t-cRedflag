@@ -1,0 +1,47 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "backend/app.py",
+      "use": "@vercel/python"
+    },
+    {
+      "src": "website/**",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "frontend/**",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "demo/**",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "desktop/**",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "backend/app.py"
+    },
+    {
+      "src": "/frontend/(.*)",
+      "dest": "frontend/$1"
+    },
+    {
+      "src": "/demo/(.*)",
+      "dest": "demo/$1"
+    },
+    {
+      "src": "/desktop/(.*)",
+      "dest": "desktop/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "website/$1"
+    }
+  ]
+}

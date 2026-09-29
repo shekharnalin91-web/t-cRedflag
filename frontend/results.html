@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Results Dashboard — CorruptX T&C Red Flag Scanner</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/results.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/chatbot.css">
+</head>
+<body>
+
+  <!-- Site Header -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand-wrapper">
+        <div class="brand-shield-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="brand-meta">
+          <span class="brand-team">Team CorruptX</span>
+          <span class="brand-name">T&C RED FLAG <span>SCANNER</span></span>
+        </div>
+      </a>
+
+      <nav class="main-nav">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="scanner.html" class="nav-link">Scanner</a>
+        <a href="results.html" class="nav-link active">Results</a>
+        <a href="history.html" class="nav-link">History</a>
+        <a href="about.html" class="nav-link">About Team</a>
+      </nav>
+
+      <div class="header-actions">
+        <div class="system-status" id="system-status-indicator">
+          <span class="status-dot"></span>
+          <span id="system-status-text">CYBER ENGINE READY</span>
+        </div>
+        <button class="mobile-menu-btn" aria-label="Toggle navigation">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Results Dashboard -->
+  <main class="container">
+
+    <!-- WEBSITE T&C ANALYSIS SOURCE INFORMATION HEADER (Shown when source_type == 'website' or URL provided) -->
+    <section id="website-source-banner" class="website-source-banner" style="display: none;">
+      <div class="source-banner-header">
+        <div class="source-title-group">
+          <span class="source-type-icon">🌐</span>
+          <div>
+            <div class="source-banner-label">WEBSITE T&C ANALYSIS</div>
+            <h2 id="web-source-domain" class="source-domain-title">example.com</h2>
+            <div id="web-source-page" class="source-page-title">Terms of Service</div>
+          </div>
+        </div>
+
+        <div class="source-status-badge-wrapper">
+          <span id="web-analysis-status-badge" class="badge badge-success">✅ Complete Analysis</span>
+        </div>
+      </div>
+
+      <div class="source-meta-grid">
+        <div class="source-meta-item">
+          <span class="sm-label">Source URL:</span>
+          <a id="web-source-url-link" href="#" target="_blank" rel="noopener" class="sm-link">https://example.com/terms</a>
+        </div>
+        <div class="source-meta-item">
+          <span class="sm-label">Words analyzed:</span>
+          <span id="web-words-analyzed" class="sm-val">0</span>
+        </div>
+        <div class="source-meta-item">
+          <span class="sm-label">Clauses detected:</span>
+          <span id="web-clauses-detected" class="sm-val">0</span>
+        </div>
+        <div class="source-meta-item">
+          <span class="sm-label">Red flags:</span>
+          <span id="web-red-flags" class="sm-val text-crimson">0</span>
+        </div>
+        <div class="source-meta-item">
+          <span class="sm-label">High-risk clauses:</span>
+          <span id="web-high-risk" class="sm-val text-crimson">0</span>
+        </div>
+      </div>
+
+      <div class="source-actions-bar">
+        <a id="btn-open-original-website" href="#" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          Open Original Website
+        </a>
+        <button type="button" id="btn-view-extracted-tc" class="btn btn-secondary btn-sm">
+          📄 View Extracted T&C
+        </button>
+        <button type="button" id="btn-view-red-flags-source" class="btn btn-secondary btn-sm">
+          🚩 View Red Flags
+        </button>
+        <button type="button" id="btn-ask-redflag-assistant" class="btn btn-primary btn-sm">
+          🤖 Ask RedFlag Assistant
+        </button>
+      </div>
+    </section>
+
+    <!-- Results Header Section -->
+    <section class="results-header-section">
+      <div class="results-doc-title-row">
+        <div class="results-title-group">
+          <h1>
+            <span style="color: var(--accent-green); font-size: 1.4rem;">&#10003;</span>
+            <span id="res-doc-title">Scan Results</span>
+          </h1>
+          <div class="results-doc-subtitle" id="res-doc-date">Scanned: Just now</div>
+        </div>
+
+        <div class="results-actions-group">
+          <button type="button" id="btn-copy-summary" class="btn btn-secondary btn-sm">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            Copy Summary
+          </button>
+          <button type="button" id="btn-export-report" class="btn btn-secondary btn-sm">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Export JSON
+          </button>
+          <a href="scanner.html" class="btn btn-primary btn-sm">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+            Scan Another Policy
+          </a>
+        </div>
+      </div>
+
+      <!-- Top Score Overview Banner -->
+      <div class="overview-card">
+        <!-- Circular Risk Score Meter -->
+        <div class="meter-wrapper">
+          <div class="circular-gauge">
+            <svg class="gauge-svg" viewBox="0 0 190 190">
+              <circle class="gauge-track" cx="95" cy="95" r="80"></circle>
+              <circle class="gauge-fill" id="gauge-fill-path" cx="95" cy="95" r="80"></circle>
+            </svg>
+            <div class="gauge-content">
+              <div class="gauge-score" id="gauge-score-value">0</div>
+              <div class="gauge-max">T&C SAFETY SCORE</div>
+            </div>
+          </div>
+          <div class="gauge-label">
+            <span class="risk-level-badge badge" id="res-risk-badge">CALCULATING</span>
+          </div>
+        </div>
+
+        <!-- Overview Content & Metrics Grid -->
+        <div class="overview-info-panel">
+          <div class="overview-status-line">
+            <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--accent-cyan); text-transform: uppercase; font-weight: 700;">
+              CYBERSECURITY RISK AUDIT COMPLETE
+            </span>
+          </div>
+
+          <p class="overview-summary-text" id="res-summary-text">
+            Executing risk classification against 18-category cybersecurity taxonomy...
+          </p>
+
+          <!-- Severity Counter Cards Grid -->
+          <div class="metrics-grid">
+            <div class="metric-box">
+              <span class="metric-label">Clauses</span>
+              <span class="metric-value" id="metric-clauses">0</span>
+            </div>
+            <div class="metric-box">
+              <span class="metric-label">Red Flags</span>
+              <span class="metric-value text-crimson" id="metric-redflags">0</span>
+            </div>
+            <div class="metric-box">
+              <span class="metric-label">Critical ⛔</span>
+              <span class="metric-value text-crimson" id="metric-critical">0</span>
+            </div>
+            <div class="metric-box">
+              <span class="metric-label">High Risk 🔴</span>
+              <span class="metric-value text-orange" id="metric-high">0</span>
+            </div>
+            <div class="metric-box">
+              <span class="metric-label">Medium 🟠</span>
+              <span class="metric-value text-amber" id="metric-med">0</span>
+            </div>
+            <div class="metric-box">
+              <span class="metric-label">Low Risk 🟡</span>
+              <span class="metric-value text-yellow" id="metric-low">0</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SUB-RISK SCORE METRIC BARS PANEL -->
+      <div class="sub-risk-metrics-card">
+        <h3 class="sub-risk-title">Sub-Risk Category Vector Analysis</h3>
+        <div class="sub-risk-grid">
+          <div class="sub-risk-item">
+            <div class="sr-label-row">
+              <span class="sr-name">Privacy Risk</span>
+              <span class="sr-val" id="sr-val-privacy">0 / 100</span>
+            </div>
+            <div class="sr-bar-track">
+              <div id="sr-bar-privacy" class="sr-bar-fill"></div>
+            </div>
+          </div>
+
+          <div class="sub-risk-item">
+            <div class="sr-label-row">
+              <span class="sr-name">Financial Risk</span>
+              <span class="sr-val" id="sr-val-financial">0 / 100</span>
+            </div>
+            <div class="sr-bar-track">
+              <div id="sr-bar-financial" class="sr-bar-fill"></div>
+            </div>
+          </div>
+
+          <div class="sub-risk-item">
+            <div class="sr-label-row">
+              <span class="sr-name">Subscription Risk</span>
+              <span class="sr-val" id="sr-val-subscription">0 / 100</span>
+            </div>
+            <div class="sr-bar-track">
+              <div id="sr-bar-subscription" class="sr-bar-fill"></div>
+            </div>
+          </div>
+
+          <div class="sub-risk-item">
+            <div class="sr-label-row">
+              <span class="sr-name">Data-Sharing Risk</span>
+              <span class="sr-val" id="sr-val-datasharing">0 / 100</span>
+            </div>
+            <div class="sr-bar-track">
+              <div id="sr-bar-datasharing" class="sr-bar-fill"></div>
+            </div>
+          </div>
+
+          <div class="sub-risk-item">
+            <div class="sr-label-row">
+              <span class="sr-name">Account / Termination Risk</span>
+              <span class="sr-val" id="sr-val-account">0 / 100</span>
+            </div>
+            <div class="sr-bar-track">
+              <div id="sr-bar-account" class="sr-bar-fill"></div>
+            </div>
+          </div>
+
+          <div class="sub-risk-item">
+            <div class="sr-label-row">
+              <span class="sr-name">Legal / Dispute Risk</span>
+              <span class="sr-val" id="sr-val-legal">0 / 100</span>
+            </div>
+            <div class="sr-bar-track">
+              <div id="sr-bar-legal" class="sr-bar-fill"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab View Switcher & Filters -->
+      <div class="results-tabs-bar">
+        <div class="tab-nav">
+          <button type="button" class="tab-btn active" data-tab="cards">
+            <span>Detected Red Flags</span>
+            <span class="tab-badge" id="tab-count-flags">0</span>
+          </button>
+          <button type="button" class="tab-btn" data-tab="highlighter">
+            <span>Interactive Policy Analysis</span>
+          </button>
+          <button type="button" class="tab-btn" data-tab="breakdown">
+            <span>Risk Breakdown</span>
+          </button>
+        </div>
+
+        <div class="filter-group">
+          <span style="font-size: 0.76rem; font-family: var(--font-mono); color: var(--text-dim); margin-right: 4px;">FILTER:</span>
+          <button type="button" class="filter-btn active" data-filter="all">All</button>
+          <button type="button" class="filter-btn" data-filter="CRITICAL">Critical ⛔</button>
+          <button type="button" class="filter-btn" data-filter="HIGH">High Risk 🔴</button>
+          <button type="button" class="filter-btn" data-filter="MEDIUM">Medium 🟠</button>
+          <button type="button" class="filter-btn" data-filter="LOW">Low 🟡</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW 1: Red Flag Cards -->
+    <section id="view-red-flags" class="red-flags-view">
+      <div id="red-flags-container">
+        <!-- Populated via results.js -->
+      </div>
+    </section>
+
+    <!-- VIEW 2: Interactive Policy Highlighter -->
+    <section id="view-policy-analysis" class="policy-analysis-view" style="display: none;">
+      <div>
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px;">
+          <h3 style="font-size: 1.15rem; color: #fff;">Full Policy Document</h3>
+          <span style="font-size: 0.8rem; font-family: var(--font-mono); color: var(--text-dim);">
+            Click any highlighted clause to inspect details
+          </span>
+        </div>
+        <div id="policy-full-text-container" class="policy-doc-container">
+          <!-- Text with highlighted spans populated via results.js -->
+        </div>
+      </div>
+
+      <!-- Sticky Inspector Panel -->
+      <aside class="sticky-inspector-panel">
+        <div class="inspector-title">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <span>Clause Inspector</span>
+        </div>
+
+        <div id="inspector-placeholder" class="inspector-placeholder">
+          <svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 15l6 6m-11-4a7 7 0 110-14 7 7 0 010 14z"/></svg>
+          <p>Click on any clause in the policy view to inspect risk details, category weights, and security impact.</p>
+        </div>
+
+        <div id="inspector-content-pane" class="inspector-content-pane" style="display: none;">
+          <!-- Active clause details inserted dynamically -->
+        </div>
+      </aside>
+    </section>
+
+    <!-- VIEW 3: Category Risk Breakdown -->
+    <section id="view-category-breakdown" class="category-breakdown-view" style="display: none;">
+      <div class="breakdown-title-row">
+        <div>
+          <h3 style="font-size: 1.25rem; color: #fff; margin-bottom: 4px;">Top Risk Categories</h3>
+          <p style="font-size: 0.88rem; color: var(--text-muted);">
+            Proportion and severity distribution of detected clauses across 18 cybersecurity risk categories.
+          </p>
+        </div>
+      </div>
+
+      <div id="category-breakdown-container">
+        <!-- Populated via results.js -->
+      </div>
+    </section>
+
+    <!-- BEFORE YOU ACCEPT CHECKLIST & ACCEPTANCE CHECKBOX BAR -->
+    <section class="acceptance-section-wrapper">
+      <div class="checklist-card">
+        <h3 class="checklist-title">Before you accept...</h3>
+        <p class="checklist-sub">Review these critical operational vectors before clicking agree:</p>
+        <div class="checklist-grid">
+          <label class="check-item">
+            <input type="checkbox" id="chk-data-use" class="chk-input">
+            <span>☐ I understand how my data will be used</span>
+          </label>
+          <label class="check-item">
+            <input type="checkbox" id="chk-auto-renew" class="chk-input">
+            <span>☐ I checked whether the subscription auto-renews</span>
+          </label>
+          <label class="check-item">
+            <input type="checkbox" id="chk-refund-policy" class="chk-input">
+            <span>☐ I checked the cancellation/refund policy</span>
+          </label>
+          <label class="check-item">
+            <input type="checkbox" id="chk-account-rules" class="chk-input">
+            <span>☐ I understand account termination rules</span>
+          </label>
+          <label class="check-item">
+            <input type="checkbox" id="chk-sharing" class="chk-input">
+            <span>☐ I checked third-party data sharing</span>
+          </label>
+          <label class="check-item">
+            <input type="checkbox" id="chk-disputes" class="chk-input">
+            <span>☐ I understand how disputes are handled</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- MAIN ACCEPTANCE CHECKBOX -->
+      <div class="agree-checkbox-box">
+        <label class="agree-label">
+          <input type="checkbox" id="chk-agree-tc" class="chk-agree-input">
+          <span class="agree-text font-bold">☐ I agree to the Terms & Conditions</span>
+        </label>
+        <span class="agree-hint">Checking this box will launch the Security Acceptance Review.</span>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ACCEPTANCE SECURITY POPUP MODAL (Triggers when checkbox checked) -->
+  <div id="acceptance-security-modal" class="modal-overlay">
+    <div class="modal-content security-modal-card">
+      <div class="modal-header">
+        <div class="modal-brand">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="var(--accent-cyan)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <span>T&C RED FLAG SCANNER</span>
+        </div>
+        <button type="button" id="btn-close-modal" class="modal-close-btn">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        <p class="modal-lead">We analyzed these Terms & Conditions before you click agree.</p>
+
+        <div class="modal-score-box">
+          <div class="ms-left">
+            <span class="ms-label">RISK SCORE</span>
+            <div id="modal-score-num" class="ms-score">🔴 38 / 100</div>
+          </div>
+          <div class="ms-right">
+            <div id="modal-issues-title" class="ms-issues">⚠️ 7 issues detected</div>
+            <div id="modal-issues-breakdown" class="ms-breakdown">🔴 3 High &bull; 🟠 2 Medium &bull; 🟡 2 Low</div>
+          </div>
+        </div>
+
+        <div class="modal-concerns-box">
+          <div class="mc-title">Main concerns detected:</div>
+          <ul id="modal-concerns-list" class="mc-list">
+            <li>• Automatic subscription renewal</li>
+            <li>• Third-party data sharing</li>
+            <li>• Broad account termination rights</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        <button type="button" id="btn-modal-view-flags" class="btn btn-secondary btn-sm">View Red Flags</button>
+        <button type="button" id="btn-modal-understand" class="btn btn-secondary btn-sm">Understand Before Accepting</button>
+        <button type="button" id="btn-modal-continue" class="btn btn-primary btn-sm">Continue Anyway</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CLAUSE EXPLAINER SIDE PANEL DRAWER -->
+  <div id="clause-explainer-drawer" class="drawer-overlay">
+    <aside class="explainer-drawer">
+      <div class="drawer-header">
+        <div class="dh-title">Clause Explainer</div>
+        <button type="button" id="btn-close-drawer" class="drawer-close-btn">&times;</button>
+      </div>
+
+      <div class="drawer-body">
+        <div class="explainer-section">
+          <span class="es-label">What the Terms say:</span>
+          <div id="drawer-original-clause" class="es-box original-text-box">
+            <!-- Original clause text inserted here -->
+          </div>
+        </div>
+
+        <div class="explainer-section">
+          <span class="es-label">In simple English:</span>
+          <div id="drawer-simple-english" class="es-box simple-text-box">
+            <!-- Plain language explanation -->
+          </div>
+        </div>
+
+        <div class="explainer-section">
+          <span class="es-label">Why it matters:</span>
+          <div id="drawer-why-matters" class="es-box why-text-box">
+            <!-- User impact -->
+          </div>
+        </div>
+
+        <div class="explainer-meta-row">
+          <div>
+            <span class="es-label">Risk Severity:</span>
+            <div id="drawer-risk-badge" class="badge">HIGH 🔴</div>
+          </div>
+          <div>
+            <span class="es-label">Source Location:</span>
+            <div id="drawer-source-location" class="location-tag">Section 8.2</div>
+          </div>
+        </div>
+
+        <div class="explainer-section">
+          <span class="es-label">What to check before accepting:</span>
+          <div id="drawer-what-to-check" class="es-box check-text-box">
+            <!-- Questions to consider -->
+          </div>
+        </div>
+
+        <div id="drawer-uncertain-warning" class="uncertainty-banner" style="display: none;">
+          ⚠️ Analysis uncertain — please verify this clause in the original Terms & Conditions.
+        </div>
+      </div>
+
+      <div class="drawer-footer">
+        <button type="button" id="btn-drawer-open-clause" class="btn btn-primary btn-block">
+          Open Original Clause
+        </button>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-disclaimer">
+        <strong>⚠️ Trust & Safety Disclaimer:</strong> This tool provides informational risk analysis, not legal advice. A safety score does not determine whether Terms & Conditions are legally valid, enforceable, or appropriate for your situation.
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 Team CorruptX — T&C Red Flag Scanner</span>
+        <span>Offline-Capable Architecture</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/rules_data.js"></script>
+  <script src="js/sample_data.js"></script>
+  <script src="js/client_analyzer.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/results.js"></script>
+  <script src="js/chatbot.js" defer></script>
+</body>
+</html>
