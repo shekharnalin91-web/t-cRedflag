@@ -24,10 +24,10 @@
       "js": [
         "scanner/rules_data.js",
         "scanner/client_analyzer.js",
-        "content/detector.js",
+        "content/popup-warning.js",
         "content/extractor.js",
         "content/highlighter.js",
-        "content/popup-warning.js"
+        "content/detector.js"
       ],
       "css": [],
       "run_at": "document_idle"
