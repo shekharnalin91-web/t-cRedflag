@@ -105,16 +105,22 @@ if menu == "🔍 AI T&C Scanner":
                 try:
                     import urllib.request
                     from bs4 import BeautifulSoup
-                    req = urllib.request.Request(target_url, headers={"User-Agent": "Mozilla/5.0"})
-                    with urllib.request.urlopen(req, timeout=10) as response:
+                    req = urllib.request.Request(
+                        target_url,
+                        headers={
+                            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+                            "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"
+                        }
+                    )
+                    with urllib.request.urlopen(req, timeout=12) as response:
                         html = response.read().decode("utf-8", errors="ignore")
                         soup = BeautifulSoup(html, "html.parser")
-                        for s in soup(["script", "style", "nav", "footer"]):
+                        for s in soup(["script", "style", "noscript", "svg"]):
                             s.extract()
-                        raw_text = soup.get_text(separator="\n")
+                        raw_text = soup.get_text(separator="\n\n")
                         doc_name = f"URL Scan: {target_url}"
                 except Exception as e:
-                    st.error(f"Could not scan URL directly: {e}")
+                    st.error(f"Could not scan URL directly ({e}). Please copy and paste the Terms text in the 'Paste T&C Text' tab.")
 
     # Display Scan Results
     if raw_text and len(raw_text.strip()) > 30:

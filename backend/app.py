@@ -80,10 +80,9 @@ def extract_tc_from_html(html_content: str, url: str = "") -> Dict[str, Any]:
     elif soup.find("h1"):
         page_title = soup.find("h1").get_text(strip=True)
 
-    # Strip noisy UI elements
+    # Strip noisy non-content elements
     for element in soup([
-        "script", "style", "meta", "noscript", "svg", "header", "footer", "nav",
-        "aside", "form", "button", "iframe", "menu", "input"
+        "script", "style", "meta", "noscript", "svg", "nav", "aside", "menu"
     ]):
         element.extract()
 
