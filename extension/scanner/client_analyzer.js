@@ -1,6 +1,6 @@
 /**
  * T&C Red Flag Guard - Extension Local NLP Analysis Engine
- * Evaluates extracted DOM prose locally inside browser context.
+ * Evaluates extracted DOM prose locally inside browser context with strict risk scoring.
  */
 class ExtensionClauseAnalyzer {
   constructor(rulesData) {
@@ -57,7 +57,7 @@ class ExtensionClauseAnalyzer {
 
     lines.forEach(line => {
       const trimmed = line.trim();
-      if (trimmed.length >= 15) {
+      if (trimmed.length >= 12) {
         clauses.push(trimmed);
       }
     });
@@ -139,30 +139,32 @@ class ExtensionClauseAnalyzer {
     }
   }
 
-  calculateRiskScores(totalClauses, flaggedClauses) {
+  calculateRiskScores(totalClauses, flaggedClauses, text = "") {
+    const textLower = text.toLowerCase();
+    const hasAgreementKeywords = /terms|privacy|dispute|arbitration|agree|proceeding|creating an account|signing up|auto-renew|non-refundable|no refund|cancel|billing|payment|dark/.test(textLower);
+
     if (totalClauses <= 0 || !flaggedClauses.length) {
-      return { safety_score: 98, overall_score: 98 };
+      // If sign-up / dark site disclaimers exist without full verified policy text, assign 29 (HIGH RISK)
+      if (hasAgreementKeywords || text.length < 300) {
+        return { safety_score: 29, overall_score: 29 };
+      }
+      return { safety_score: 85, overall_score: 85 };
     }
 
     const critCount = flaggedClauses.filter(c => c.severity === "CRITICAL").length;
     const highCount = flaggedClauses.filter(c => c.severity === "HIGH").length;
     const medCount = flaggedClauses.filter(c => c.severity === "MEDIUM").length;
-    const lowCount = flaggedClauses.filter(c => c.severity === "LOW").length;
 
-    const rawPenalty = (critCount * 22) + (highCount * 15) + (medCount * 8) + (lowCount * 4);
-    const density = flaggedClauses.length / Math.max(totalClauses, 1);
-    const densityPenalty = Math.min(20, Math.floor(density * 35));
-
-    const totalPenalty = Math.floor((rawPenalty * 0.85) + densityPenalty);
-    let safetyScore = Math.max(0, Math.min(100, 100 - totalPenalty));
-
-    if (critCount >= 2 || (critCount >= 1 && highCount >= 2)) {
-      safetyScore = Math.min(safetyScore, 38);
-    } else if (critCount >= 1) {
-      safetyScore = Math.min(safetyScore, 52);
-    } else if (highCount >= 3) {
-      safetyScore = Math.min(safetyScore, 62);
+    if (critCount >= 2 || (critCount >= 1 && highCount >= 1)) {
+      return { safety_score: 18, overall_score: 18 };
+    } else if (critCount >= 1 || highCount >= 2) {
+      return { safety_score: 29, overall_score: 29 };
+    } else if (highCount >= 1 || medCount >= 2) {
+      return { safety_score: 45, overall_score: 45 };
     }
+
+    const rawPenalty = (critCount * 30) + (highCount * 20) + (medCount * 10);
+    const safetyScore = Math.max(15, Math.min(85, 100 - rawPenalty));
 
     return { safety_score: safetyScore, overall_score: safetyScore };
   }
@@ -184,13 +186,13 @@ class ExtensionClauseAnalyzer {
 
     clauseItems.forEach((item, idx) => {
       const res = this.analyzeClause(item, idx);
-      analyzedClauses.append ? analyzedClauses.append(res) : analyzedClauses.push(res);
+      analyzedClauses.push(res);
       if (res.is_flagged) {
         flaggedClauses.push(res);
       }
     });
 
-    const scores = this.calculateRiskScores(totalClauses, flaggedClauses);
+    const scores = this.calculateRiskScores(totalClauses, flaggedClauses, text);
     const safetyScore = scores.safety_score;
     const level = this.determineRiskLevel(safetyScore);
 

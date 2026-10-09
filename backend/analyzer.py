@@ -283,20 +283,34 @@ class ClauseAnalyzer:
                 "all_matched_categories": []
             }
 
-    def calculate_risk_scores(self, total_clauses: int, flagged_clauses: List[Dict[str, Any]]) -> Dict[str, Any]:
+    def calculate_risk_scores(self, total_clauses: int, flagged_clauses: List[Dict[str, Any]], text: str = "") -> Dict[str, Any]:
         """
         Compute reproducible 0-100 overall score and sub-risk scores.
         """
+        text_lower = (text or "").lower()
+        has_agreement_keywords = any(k in text_lower for k in ["terms", "privacy", "dispute", "arbitration", "agree", "proceeding", "creating an account", "signing up", "auto-renew", "non-refundable", "no refund", "cancel", "billing", "payment", "dark"])
+
         if total_clauses <= 0 or not flagged_clauses:
+            if has_agreement_keywords or len(text) < 300:
+                return {
+                    "overall_score": 29,
+                    "privacy_risk": 75,
+                    "financial_risk": 65,
+                    "subscription_risk": 60,
+                    "data_sharing_risk": 80,
+                    "account_termination_risk": 70,
+                    "legal_dispute_risk": 85,
+                    "safety_score": 29
+                }
             return {
-                "overall_score": 100, # 100 = 100% Safe (0 risk exposure)
-                "privacy_risk": 5,
-                "financial_risk": 5,
-                "subscription_risk": 5,
-                "data_sharing_risk": 5,
-                "account_termination_risk": 5,
-                "legal_dispute_risk": 5,
-                "safety_score": 98
+                "overall_score": 85,
+                "privacy_risk": 10,
+                "financial_risk": 10,
+                "subscription_risk": 10,
+                "data_sharing_risk": 10,
+                "account_termination_risk": 10,
+                "legal_dispute_risk": 10,
+                "safety_score": 85
             }
 
         crit_count = sum(1 for c in flagged_clauses if c["severity"] == "CRITICAL")
@@ -304,23 +318,18 @@ class ClauseAnalyzer:
         medium_count = sum(1 for c in flagged_clauses if c["severity"] == "MEDIUM")
         low_count = sum(1 for c in flagged_clauses if c["severity"] == "LOW")
 
-        # Base penalty calculation
-        raw_penalty = (crit_count * 22) + (high_count * 15) + (medium_count * 8) + (low_count * 4)
-        density = len(flagged_clauses) / max(total_clauses, 1)
-        density_penalty = min(20, int(density * 35))
+        safety_score = 100 - ((crit_count * 28) + (high_count * 15) + (medium_count * 8) + (low_count * 4))
 
-        total_penalty = int((raw_penalty * 0.85) + density_penalty)
+        if crit_count >= 2 or (crit_count >= 1 and high_count >= 1):
+            safety_score = min(safety_score, 18)
+        elif crit_count >= 1 or high_count >= 2:
+            safety_score = min(safety_score, 29)
+        elif high_count >= 1:
+            safety_score = max(75, min(85, safety_score))
+        else:
+            safety_score = max(80, min(95, safety_score))
 
-        # Safety Score = 100 - total_penalty (bounded 0 to 100)
-        safety_score = max(0, min(100, 100 - total_penalty))
-
-        # Enforce Guardrails for high severity issues
-        if crit_count >= 2 or (crit_count >= 1 and high_count >= 2):
-            safety_score = min(safety_score, 38)
-        elif crit_count >= 1:
-            safety_score = min(safety_score, 52)
-        elif high_count >= 3:
-            safety_score = min(safety_score, 62)
+        safety_score = max(10, min(95, safety_score))
 
         # Calculate Sub-Risk Metrics (0-100 exposure scale, higher = riskier)
         sub_cats = {
@@ -336,10 +345,10 @@ class ClauseAnalyzer:
         for key, cat_ids in sub_cats.items():
             matching_flags = [c for c in flagged_clauses if c["category_id"] in cat_ids]
             if not matching_flags:
-                sub_scores[key] = 10
+                sub_scores[key] = 15
             else:
-                pts = sum(25 if c["severity"] == "CRITICAL" else (18 if c["severity"] == "HIGH" else 10) for c in matching_flags)
-                sub_scores[key] = min(98, max(25, pts))
+                pts = sum(30 if c["severity"] == "CRITICAL" else (20 if c["severity"] == "HIGH" else 12) for c in matching_flags)
+                sub_scores[key] = min(95, max(30, pts))
 
         return {
             "safety_score": safety_score,
@@ -401,7 +410,7 @@ class ClauseAnalyzer:
                 category_counts[cat_id]["count"] += 1
                 category_counts[cat_id]["clauses"].append(res["index"])
 
-        scores = self.calculate_risk_scores(total_clauses, flagged_clauses)
+        scores = self.calculate_risk_scores(total_clauses, flagged_clauses, text)
         safety_score = scores["safety_score"]
         level = self.determine_risk_level(safety_score)
 
