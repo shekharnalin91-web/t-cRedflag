@@ -140,14 +140,7 @@ class ExtensionClauseAnalyzer {
   }
 
   calculateRiskScores(totalClauses, flaggedClauses, text = "") {
-    const textLower = text.toLowerCase();
-    const hasAgreementKeywords = /terms|privacy|dispute|arbitration|agree|proceeding|creating an account|signing up|auto-renew|non-refundable|no refund|cancel|billing|payment|dark/.test(textLower);
-
-    if (totalClauses <= 0 || !flaggedClauses.length) {
-      // If sign-up / dark site disclaimers exist without full verified policy text, assign 29 (HIGH RISK)
-      if (hasAgreementKeywords || text.length < 300) {
-        return { safety_score: 29, overall_score: 29 };
-      }
+    if (!flaggedClauses || flaggedClauses.length === 0) {
       return { safety_score: 85, overall_score: 85 };
     }
 
@@ -159,12 +152,12 @@ class ExtensionClauseAnalyzer {
       return { safety_score: 18, overall_score: 18 };
     } else if (critCount >= 1 || highCount >= 2) {
       return { safety_score: 29, overall_score: 29 };
-    } else if (highCount >= 1 || medCount >= 2) {
-      return { safety_score: 45, overall_score: 45 };
     }
 
+    return { safety_score: 85, overall_score: 85 };
+
     const rawPenalty = (critCount * 30) + (highCount * 20) + (medCount * 10);
-    const safetyScore = Math.max(15, Math.min(85, 100 - rawPenalty));
+    const safetyScore = Math.max(15, Math.min(80, 85 - rawPenalty));
 
     return { safety_score: safetyScore, overall_score: safetyScore };
   }

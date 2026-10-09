@@ -271,22 +271,7 @@ class ClientClauseAnalyzer {
   }
 
   calculateRiskScores(totalClauses, flaggedClauses, text = "") {
-    const textLower = (text || "").toLowerCase();
-    const hasAgreementKeywords = /terms|privacy|dispute|arbitration|agree|proceeding|creating an account|signing up|auto-renew|non-refundable|no refund|cancel|billing|payment|dark/.test(textLower);
-
-    if (totalClauses <= 0 || !flaggedClauses.length) {
-      if (hasAgreementKeywords || text.length < 300) {
-        return {
-          safety_score: 29,
-          overall_score: 29,
-          privacy_risk: 75,
-          financial_risk: 65,
-          subscription_risk: 60,
-          data_sharing_risk: 80,
-          account_termination_risk: 70,
-          legal_dispute_risk: 85
-        };
-      }
+    if (!flaggedClauses || flaggedClauses.length === 0) {
       return {
         safety_score: 85,
         overall_score: 85,
@@ -304,17 +289,17 @@ class ClientClauseAnalyzer {
     const medCount = flaggedClauses.filter(c => c.severity === "MEDIUM").length;
     const lowCount = flaggedClauses.filter(c => c.severity === "LOW").length;
 
-    let safetyScore = 100 - ((critCount * 28) + (highCount * 18) + (medCount * 10) + (lowCount * 4));
+    let safetyScore = 85 - ((critCount * 30) + (highCount * 20) + (medCount * 10) + (lowCount * 4));
 
     if (critCount >= 2 || (critCount >= 1 && highCount >= 1)) {
       safetyScore = Math.min(safetyScore, 18);
     } else if (critCount >= 1 || highCount >= 2) {
       safetyScore = Math.min(safetyScore, 29);
-    } else if (highCount >= 1 || medCount >= 2) {
-      safetyScore = Math.min(safetyScore, 45);
+    } else {
+      safetyScore = Math.max(80, Math.min(95, safetyScore));
     }
 
-    safetyScore = Math.max(10, Math.min(85, safetyScore));
+    safetyScore = Math.max(15, Math.min(85, safetyScore));
 
     const subCats = {
       privacy: ["data_collection", "location_tracking", "biometric_data", "data_retention_deletion"],

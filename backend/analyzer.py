@@ -287,21 +287,7 @@ class ClauseAnalyzer:
         """
         Compute reproducible 0-100 overall score and sub-risk scores.
         """
-        text_lower = (text or "").lower()
-        has_agreement_keywords = any(k in text_lower for k in ["terms", "privacy", "dispute", "arbitration", "agree", "proceeding", "creating an account", "signing up", "auto-renew", "non-refundable", "no refund", "cancel", "billing", "payment", "dark"])
-
-        if total_clauses <= 0 or not flagged_clauses:
-            if has_agreement_keywords or len(text) < 300:
-                return {
-                    "overall_score": 29,
-                    "privacy_risk": 75,
-                    "financial_risk": 65,
-                    "subscription_risk": 60,
-                    "data_sharing_risk": 80,
-                    "account_termination_risk": 70,
-                    "legal_dispute_risk": 85,
-                    "safety_score": 29
-                }
+        if not flagged_clauses:
             return {
                 "overall_score": 85,
                 "privacy_risk": 10,
@@ -318,14 +304,12 @@ class ClauseAnalyzer:
         medium_count = sum(1 for c in flagged_clauses if c["severity"] == "MEDIUM")
         low_count = sum(1 for c in flagged_clauses if c["severity"] == "LOW")
 
-        safety_score = 100 - ((crit_count * 28) + (high_count * 15) + (medium_count * 8) + (low_count * 4))
+        safety_score = 85 - ((crit_count * 30) + (high_count * 20) + (medium_count * 10) + (low_count * 4))
 
         if crit_count >= 2 or (crit_count >= 1 and high_count >= 1):
             safety_score = min(safety_score, 18)
         elif crit_count >= 1 or high_count >= 2:
             safety_score = min(safety_score, 29)
-        elif high_count >= 1:
-            safety_score = max(75, min(85, safety_score))
         else:
             safety_score = max(80, min(95, safety_score))
 
